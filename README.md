@@ -22,7 +22,7 @@ We show the performence in three real traffic dataset Abilene, GEANT, CERNET on 
 <img src="image/sigma.png" width="500"/>
 
 ### Results in different outliers ratio $\gamma$.
-<img src="image/ratio.png" width="800"/>
+<img src="image/ratio.png" width="500"/>
 
 ### Results in different tensor rank $R$.
 <img src="image/R.png" width="500"/>
