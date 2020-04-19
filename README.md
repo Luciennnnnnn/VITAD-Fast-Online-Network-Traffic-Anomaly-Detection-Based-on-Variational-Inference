@@ -28,5 +28,5 @@ We show the performence in three real traffic dataset Abilene, GEANT, CERNET on 
 <img src="image/R.png" width="500"/>
 
 ## Improved version takes full account of the periodicity in the traffic data.
-<img src="image/ratio2_TPRS.png" width="400"/>
-<img src="image/ratio2_FPRS.png" width="400"/>
+<img src="image/ratio2_TPRS.png" width="450"/>
+<img src="image/ratio2_FPRS.png" width="450"/>
