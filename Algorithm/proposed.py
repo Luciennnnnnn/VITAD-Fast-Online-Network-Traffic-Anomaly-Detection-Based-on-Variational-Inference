@@ -19,7 +19,7 @@ import matplotlib
 matplotlib.use('Agg')
 sys.path.append("../..")
 
-from utils import *
+from utils.utils import *
 
 
 def BCPF_IC(Y, outliers_p, maxRank, maxiters, tol=1e-5, verbose=1, init='ml'):

@@ -28,14 +28,17 @@ def safelog(x):
 
 
 def unfold(tensor, mode):
+    # unfold tensor to matrix
     return np.reshape(np.moveaxis(tensor, mode, 0), (tensor.shape[mode], -1), 'F')
 
 
 def tensor_to_vec(tensor):
+    # convert tensor to vector
     return np.reshape(tensor, (-1, 1), 'F')
 
 
 def hardmard(tensors):
+    # calculate hardmard product of tensors
     ans = np.ones_like(tensors[0])
     for i in range(len(tensors)):
         ans = ans * tensors[i]
@@ -43,6 +46,7 @@ def hardmard(tensors):
 
 
 def choice(DIM, p):
+    # random sampling
     indices = np.random.choice(np.prod(DIM), int(round(np.prod(DIM) * p)), replace=False)
     X, Y, Z = [], [], []
     for i in range(indices.size):
@@ -54,6 +58,7 @@ def choice(DIM, p):
 
 
 def generator(dataset_name, fraction, mu, sigma, SNR=None, distribution="Gaussian"):
+    # generate outliers
     #print(os.getcwd())
     a = np.load(os.path.join(os.path.join('../../data', dataset_name), r'normlized_tensor.npy'))
     b = np.zeros_like(a, dtype=bool)
@@ -85,40 +90,8 @@ def generator(dataset_name, fraction, mu, sigma, SNR=None, distribution="Gaussia
     return a, b
 
 
-def generator2(dataset_name, fraction, mu, sigma, SNR=None, distribution="Gaussian"):
-    #print(os.getcwd())
-    a = np.load(os.path.join(os.path.join('../../data', dataset_name), r'normlized_tensor.npy'))
-    b = np.zeros_like(a, dtype=bool)
-    DIM = a.shape
-    sigmas = [0.01, 0.05, 0.1, 0.5, 1]
-    #Add noise
-    if SNR != None:
-        sigma2 = np.var(tensor_to_vec(a))*(1 / (10 ** (SNR / 10)))
-        GN = np.sqrt(sigma2) * np.random.randn(DIM[0], DIM[1], DIM[2])
-        a = a + GN
-
-    for it in range(5):
-        #Add outliers
-        if distribution == "Gaussian":
-            outliers = np.random.randn(DIM[0], DIM[1], DIM[2]) * sqrt(sigmas[it]) + mu
-        elif distribution == "levy_stable":
-            outliers = levy_stable.rvs(sigma, mu, size=(DIM[0], DIM[1], DIM[2]))
-
-        locations = list(range(np.prod(DIM)))
-        if fraction != 0:
-            sampled_locations = np.random.choice(locations, int(len(locations) * fraction), replace=False)
-            # print(len(sampled_locations))
-            for x in sampled_locations:
-                k = x // (DIM[0] * DIM[1])
-                x %= (DIM[0] * DIM[1])
-                i = x // DIM[1]
-                j = x % DIM[1]
-                b[i, j, k] = 1
-                a[i, j, k] += outliers[i, j, k]
-    return a, b
-
-
 def topk(X, _k, dimY):
+    # calculate top-k element in absolute value
     a = []
     for i in range(dimY[0]):
         for j in range(dimY[1]):
@@ -128,6 +101,7 @@ def topk(X, _k, dimY):
 
 
 def check(e, outliers_p, epsilon, dimY):
+    # calculate TPR and FPR
     TP = 0
     FP = 0
     p = topk(e, epsilon, dimY)

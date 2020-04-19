@@ -17,9 +17,8 @@ import scipy.signal
 from numpy.linalg import norm, svd, inv, det
 import matplotlib
 matplotlib.use('Agg')
-sys.path.append("../..")
 
-from utils import *
+from utils.utils import *
 
 
 def update(Y, O, params, N, maxRank, maxiters, tol=1e-5, verbose=0):

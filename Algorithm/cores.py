@@ -1,4 +1,4 @@
-from proposed import *
+from .proposed import *
 
 Rs = {'Abilene': 2, 'GEANT': 12, 'CERNET': 6}
 inits = {'Abilene': 'rand', 'GEANT': 'rand', 'CERNET': 'ml'}
@@ -97,35 +97,4 @@ def eval_ratio(dataset_name):
     with open(os.path.join(os.path.join('../../results', dataset_name), 'proposed/ratio_TPRS.json'), 'w') as FD:
         FD.write(json.dumps(TPRS))
     with open(os.path.join(os.path.join('../../results', dataset_name), 'proposed/ratio_FPRS.json'), 'w') as FD:
-        FD.write(json.dumps(FPRS))
-
-
-def eval_ratio2(dataset_name):
-    TPRS = []
-    FPRS = []
-    fractions = [0.1, 0.2, 0.3, 0.4, 0.5]
-    for fraction in fractions:
-        model = evaluate(dataset_name, 8000, fraction, 0, 0.1, Rs[dataset_name])
-        TPRS.append(model['precision'])
-        FPRS.append(model['FPR'])
-
-    with open(os.path.join(os.path.join('../../results', dataset_name), 'proposed/ratio2_TPRS.json'), 'w') as FD:
-        FD.write(json.dumps(TPRS))
-    with open(os.path.join(os.path.join('../../results', dataset_name), 'proposed/ratio2_FPRS.json'), 'w') as FD:
-        FD.write(json.dumps(FPRS))
-
-
-def eval_SNR(dataset_name):
-    TPRS = []
-    FPRS = []
-    SNRs = [0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.2, 0.3, 0.4, 0.5]
-    for SNR in SNRs:
-        model = evaluate(dataset_name, 8000, 0.1, 0, 0.1, Rs[dataset_name], SNR)
-        TPRS.append(model['precision'])
-        FPRS.append(model['FPR'])
-        print(SNR)
-
-    with open(os.path.join(os.path.join('../../results', dataset_name), 'proposed/SNR1_TPRS.json'), 'w') as FD:
-        FD.write(json.dumps(TPRS))
-    with open(os.path.join(os.path.join('../../results', dataset_name), 'proposed/SNR1_FPRS.json'), 'w') as FD:
         FD.write(json.dumps(FPRS))

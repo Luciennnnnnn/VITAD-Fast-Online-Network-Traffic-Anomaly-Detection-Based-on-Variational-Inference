@@ -1,5 +1,8 @@
-from proposed import *
-from cores import *
+import sys
+sys.path.append("..")
+
+from Algorithm.cores import *
+
 
 if __name__ == '__main__':
     # run experiment for metrics mu
