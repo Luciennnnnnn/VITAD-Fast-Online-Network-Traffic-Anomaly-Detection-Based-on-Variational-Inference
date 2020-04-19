@@ -1,7 +1,7 @@
 # VITAD-Fast-Online-Network-Traffic-Anomaly-Detection-Based-on-Variational-Inference
 Paper code in "VITAD: Fast Online Network Traffic Anomaly Detection Based on Variational Inference".
 # Dependencies
-This project uses Python 3.7.0. Before running the code, you have to install
+This project uses Python 3.7.3. Before running the code, you have to install
 * [Scipy](https://www.scipy.org/)
 * [Numpy](http://www.numpy.org/)
 * [Matplotlib](https://matplotlib.org/)
